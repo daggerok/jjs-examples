@@ -3,7 +3,9 @@ env:
   - TERM=dumb
   - secure: f1XNlOpnox3l/MxKM2yEXVwm6lxuTYAP+w25mLH4wgcatQm0JnWkk5RKsjQKZnUkZPn7AfiTi1ZnNMvYD/00EYnsSsYLmBLoT73Zz3hYHT/Ems14ygpO3OdHssb78/VjQsssklqXx2Xseg6j9HyE71REs+VJUGxnpEQsSCW+Lu5LGf14VpB6ZY2usO7EhIpWmG0CE3gO9elqsCfGDwQ7mvZhA04fDRedMqPTp7VATbTKU74qEmfHmLcVcyoxQsnIl0cTB2uQg9RNLPTZw47wujvrLpqIJiTyMqloG5YV2nR5ZL7d67S8VUqYR1igpzt6BWClHd10B48N2u5qiK+58j3NeBwN0GmFPAKuz1qIhqbV6qiRBHYUw+1b9vOhwn9vbDwR88qJQWt6QkQzifhk0wej4fOP7X6ElY+9bNeHQoGynM9HXeZDwdEjyo2XE7Bsh6lrbvGufsDdpdzrVBkxeKaLouFhmGE40cJrxxjesJgEzmmt3H/wcPEUoI4TXe1bvav8fzb2D2Uj5oC0WVfipqWCE5WqxmqzZj9htBs8nfpGJgYHtFV7HQlqPgHWb/QYc2J3P0gKwYXX4AFajbtiDwWdEJtXAZoziIXm/LsQnRVBBDF8FJzK7OBnmammOPSMafuEwdo0POX3tBfcMICxavY1GJnzAZkWB7fL8lNIrXo=
 language: java
-jdk: oraclejdk8
+jdk:
+- oraclejdk8
+- oraclejdk10
 install: true
 script:
 - export root=$(pwd)
@@ -13,7 +15,9 @@ script:
   ; do
     cd ${root}/${project}
     ./gradlew
+    java -jar ${root}/${project}/build/libs/*-all.jar
     ./mvnw
+    java -jar ${root}/${project}/target/*-all.jar
   done
 before_deploy:
 - cd ${root}

@@ -6,6 +6,7 @@ ifndef::backend-html5[]
 endif::backend-html5[]
 Maksim Kostromin <daggerok@gmail.com>
 {docdatetime}
+:docinfo:
 :doctype: book
 :toc: left
 :toclevels: 4
@@ -14,7 +15,6 @@ Maksim Kostromin <daggerok@gmail.com>
 :hide-uri-scheme:
 :revnumber: {project-version}
 :example-caption!:
-:source-highlighter: highlightjs
 
 Travis CI status:
 image:https://travis-ci.org/daggerok/{root-project-name}.svg?branch=master["Build Status", link={github-url}]
