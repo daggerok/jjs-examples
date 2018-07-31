@@ -4,7 +4,7 @@
 <book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
 <title>jjs-examples (0.0.1)</title>
-<date>2018-07-31 19:38:18 UTC</date>
+<date>2018-07-31 19:51:58 UTC</date>
 <author>
 <personname>
 <firstname>Maksim</firstname>
@@ -16,7 +16,7 @@
 <revhistory>
 <revision>
 <revnumber>0.0.1</revnumber>
-<date>2018-07-31 19:38:18 UTC</date>
+<date>2018-07-31 19:51:58 UTC</date>
 <authorinitials>MK</authorinitials>
 </revision>
 </revhistory>
@@ -47,23 +47,48 @@
 <section xml:id="hello-nashorn">
 <title>hello-nashorn</title>
 <formalpara>
-<title>create simple java.js app</title>
+<title>using Runnable interface (js code must have run function</title>
 <para>
-<programlisting language="kotlin" linenumbering="unnumbered">package daggerok
+<programlisting language="kotlin" linenumbering="unnumbered">package daggerok.runnableapp
 
 import javax.script.Invocable
 import javax.script.ScriptEngineManager
 
 fun main(args: Array&lt;String&gt;) {
-  val engine = ScriptEngineManager().getEngineByName("nashorn")
-  engine.eval("""
+    val engine = ScriptEngineManager().getEngineByName("nashorn")
+    engine.eval("""
+    function greet(name) {
+      return "Hello, " + name + "!";
+    }
+    var greeting = "Ololo-Trololo";
+    function run() {
+      print("greet('" + greeting + "') = '" + greet(greeting) + "'");
+    }
+  """)
+    val invocable = engine as Invocable
+    val runnable = invocable.getInterface(Runnable::class.java)
+    runnable.run()
+}</programlisting>
+</para>
+</formalpara>
+<formalpara>
+<title>create simple java.js app</title>
+<para>
+<programlisting language="kotlin" linenumbering="unnumbered">package daggerok.hellonashornapp
+
+import javax.script.Invocable
+import javax.script.ScriptEngineManager
+
+fun main(args: Array&lt;String&gt;) {
+    val engine = ScriptEngineManager().getEngineByName("nashorn")
+    engine.eval("""
     function greet(name) {
       return "Hello, " + name + "!";
     }
   """)
-  val invocable = engine as Invocable
-  println(invocable.invokeFunction("greet", "World"))
-  println(invocable.invokeFunction("greet", "Maksimko"))
+    val invocable = engine as Invocable
+    println(invocable.invokeFunction("greet", "World"))
+    println(invocable.invokeFunction("greet", "Maksimko"))
 }</programlisting>
 </para>
 </formalpara>
