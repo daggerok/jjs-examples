@@ -7,8 +7,14 @@ jdk: oraclejdk8
 install: true
 script:
 - export root=$(pwd)
-- bash mvnw >/dev/null
-- bash gradlew >/dev/null
+- |
+  for project in \
+    hello-nashorn \
+  ; do
+    cd ${root}/${project}
+    ./gradlew
+    ./mvnw
+  done
 before_deploy:
 - cd ${root}
 - "./mvnw -Pdocs"
